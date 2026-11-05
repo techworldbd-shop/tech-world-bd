@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TECH WORLD BD | Gadgets & Accessories</title>
+<style>
+:root{--bg:#070d18;--panel:#101b2d;--blue:#16baff;--blue2:#0877d1;--text:#f4f8ff;--muted:#a8b7cb;--line:#23334b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#081222,#050a12);color:var(--text);font-family:Arial,"Noto Sans Bengali",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#07111fee;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.wrap{max-width:1100px;margin:auto;padding:16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-size:22px;font-weight:900;letter-spacing:.5px}.brand b{color:var(--blue)}
+button,.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#001321}
+button.secondary{background:#17263c;color:var(--text);border:1px solid #314763}
+.hero{margin:22px auto;padding:30px 22px;border:1px solid #17456a;border-radius:22px;background:radial-gradient(circle at 85% 15%,#07558a77,transparent 35%),linear-gradient(120deg,#101e33,#07101d);display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
+.hero h1{font-size:clamp(30px,6vw,52px);line-height:1.08;margin:8px 0}.hero h1 span{color:var(--blue)}.hero p{color:var(--muted);line-height:1.7}.hero-art{font-size:90px;text-align:center;filter:drop-shadow(0 0 24px #10aaff66)}
+.tag{display:inline-block;color:#7edcff;border:1px solid #17608a;border-radius:99px;padding:6px 10px;font-size:12px}
+h2{font-size:23px;margin:28px 0 14px}.categories{display:flex;gap:9px;overflow:auto;padding-bottom:6px}.categories button{white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:linear-gradient(180deg,#111f33,#0c1626);border:1px solid var(--line);border-radius:17px;overflow:hidden}
+.photo{height:145px;background:radial-gradient(circle,#163e61,#0c1727);display:grid;place-items:center;font-size:55px}
+.info{padding:13px}.info h3{margin:0 0 7px;font-size:16px}.price{color:#65d2ff;font-weight:900;margin:8px 0 12px}.info button{width:100%}
+.note{color:var(--muted);font-size:13px;line-height:1.6}
+footer{margin-top:35px;border-top:1px solid var(--line);color:var(--muted);text-align:center;padding:25px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:10;overflow:auto;padding:18px}.box{max-width:620px;margin:30px auto;background:#0d192a;border:1px solid #31506d;border-radius:18px;padding:20px}
+input,textarea,select{width:100%;margin:6px 0 12px;padding:12px;border-radius:10px;border:1px solid #314763;background:#07111e;color:white}
+label{font-size:13px;color:#c4d3e6}.row{display:flex;gap:10px}.row>*{flex:1}
+.cartline{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.hero-art{font-size:65px}.wrap{padding:13px}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap top"><div class="brand">⚡ TECH <b>WORLD BD</b></div><div><button class="secondary" onclick="openCart()">কার্ট (<span id="count">0</span>)</button> <button onclick="openAdmin()">অ্যাডমিন</button></div></div></header>
+<main class="wrap">
+<section class="hero"><div><span class="tag">GADGETS • ACCESSORIES • SMART TECH</span><h1>Shop Smart.<br><span>Live Smart.</span></h1><p>আপনার পছন্দের গ্যাজেট ও মোবাইল অ্যাক্সেসরিজ কিনুন সহজেই। পণ্য বেছে নিন, কার্টে যোগ করুন, তারপর WhatsApp-এ অর্ডার পাঠান।</p><button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">পণ্য দেখুন ↓</button></div><div class="hero-art">🎧 ⌚ 🔊</div></section>
+<h2>ক্যাটাগরি</h2><div class="categories"><button class="secondary" onclick="filter('সব')">সব পণ্য</button><button class="secondary" onclick="filter('স্পিকার')">🔊 স্পিকার</button><button class="secondary" onclick="filter('ইয়ারবাডস')">🎧 ইয়ারবাডস</button><button class="secondary" onclick="filter('স্মার্ট ওয়াচ')">⌚ স্মার্ট ওয়াচ</button><button class="secondary" onclick="filter('মোবাইল অ্যাক্সেসরিজ')">📱 মোবাইল অ্যাক্সেসরিজ</button></div>
+<h2 id="products">নতুন ও জনপ্রিয় পণ্য</h2><div class="grid" id="grid"></div>
+<p class="note">দ্রষ্টব্য: এটি তোমার দোকানের প্রাথমিক ডেমো। পণ্যের নমুনা ও দাম অ্যাডমিন থেকে বদলাতে পারবে। WhatsApp অর্ডারের আগে নিজের ব্যবসায়িক নম্বর সেট করো।</p>
+</main>
+<footer>© <span id="year"></span> TECH WORLD BD · Smart Gadgets & Accessories</footer>
+
+<div class="modal" id="admin"><div class="box"><div class="top"><h2 style="margin:0">অ্যাডমিন প্যানেল</h2><button class="secondary" onclick="closeModal('admin')">বন্ধ</button></div>
+<p class="note">এখান থেকে এই ডেমোতে পণ্য যোগ/মুছতে এবং WhatsApp নম্বর সেট করতে পারবে।</p>
+<label>পণ্যের নাম</label><input id="pname" placeholder="যেমন: Bluetooth Speaker X9">
+<div class="row"><div><label>ক্যাটাগরি</label><select id="pcat"><option>স্পিকার</option><option>ইয়ারবাডস</option><option>স্মার্ট ওয়াচ</option><option>মোবাইল অ্যাক্সেসরিজ</option></select></div><div><label>দাম (৳)</label><input id="pprice" type="number" placeholder="যেমন 1290"></div></div>
+<div class="row"><div><label>ইমোজি/আইকন</label><input id="picon" placeholder="🔊"></div><div style="display:flex;align-items:end"><button style="width:100%;margin-bottom:12px" onclick="addProduct()">পণ্য যোগ করুন</button></div></div>
+<label>ব্যবসায়িক WhatsApp নম্বর (দেশের কোডসহ, যেমন 8801XXXXXXXXX)</label><input id="wa" placeholder="এখনো সেট করা হয়নি">
+<button onclick="saveSettings()">সেটিংস সেভ</button><h3>বর্তমান পণ্য</h3><div id="manage"></div>
+</div></div>
+<div class="modal" id="cart"><div class="box"><div class="top"><h2 style="margin:0">তোমার কার্ট</h2><button class="secondary" onclick="closeModal('cart')">বন্ধ</button></div><div id="cartitems"></div><h3 id="total"></h3><label>তোমার নাম</label><input id="buyer" placeholder="নাম"><label>ডেলিভারি ঠিকানা</label><textarea id="address" placeholder="সম্পূর্ণ ঠিকানা"></textarea><label>মোবাইল নম্বর</label><input id="phone" placeholder="01XXXXXXXXX"><button onclick="checkout()">WhatsApp-এ অর্ডার পাঠাও</button><p class="note">WhatsApp নম্বর সেট না করা থাকলে অর্ডার পাঠানো যাবে না।</p></div></div>
+<script>
+const starter=[
+ {id:1,name:"Bluetooth Speaker X9",cat:"স্পিকার",price:1290,icon:"🔊"},
+ {id:2,name:"Wireless Earbuds Pro",cat:"ইয়ারবাডস",price:990,icon:"🎧"},
+ {id:3,name:"Smart Watch Series 8",cat:"স্মার্ট ওয়াচ",price:1590,icon:"⌚"},
+ {id:4,name:"Fast Charging Cable",cat:"মোবাইল অ্যাক্সেসরিজ",price:250,icon:"🔌"}
+];
+let products=JSON.parse(localStorage.getItem("tw_products")||"null")||starter;
+let cart=JSON.parse(localStorage.getItem("tw_cart")||"[]"), category="সব";
+const money=n=>"৳"+Number(n).toLocaleString("en-US");
+function save(){localStorage.setItem("tw_products",JSON.stringify(products));localStorage.setItem("tw_cart",JSON.stringify(cart))}
+function render(){let list=category==="সব"?products:products.filter(p=>p.cat===category);document.getElementById("grid").innerHTML=list.map(p=>`<article class="card"><div class="photo">${p.icon||"📦"}</div><div class="info"><h3>${escapeHtml(p.name)}</h3><div class="note">${escapeHtml(p.cat)}</div><div class="price">${money(p.price)}</div><button onclick="addCart(${p.id})">কার্টে যোগ করুন</button></div></article>`).join("")||'<p class="note">এই ক্যাটাগরিতে এখনো পণ্য নেই।</p>';document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function filter(c){category=c;render()}
+function addCart(id){let x=cart.find(a=>a.id===id);x?x.qty++:cart.push({id,qty:1});save();render()}
+function openAdmin(){document.getElementById("admin").style.display="block";document.getElementById("wa").value=localStorage.getItem("tw_wa")||"";manage()}
+function openCart(){document.getElementById("cart").style.display="block";cartView()}
+function closeModal(id){document.getElementById(id).style.display="none"}
+function addProduct(){let name=document.getElementById("pname").value.trim(),price=Number(document.getElementById("pprice").value),cat=document.getElementById("pcat").value,icon=document.getElementById("picon").value.trim()||"📦";if(!name||price<=0){alert("পণ্যের নাম ও সঠিক দাম দাও।");return}products.push({id:Date.now(),name,cat,price,icon});save();document.getElementById("pname").value="";document.getElementById("pprice").value="";document.getElementById("picon").value="";render();manage()}
+function manage(){document.getElementById("manage").innerHTML=products.map(p=>`<div class="cartline"><span>${escapeHtml(p.name)} · ${money(p.price)}</span><button class="secondary" onclick="removeProduct(${p.id})">মুছুন</button></div>`).join("")||"কোনো পণ্য নেই"}
+function removeProduct(id){products=products.filter(p=>p.id!==id);cart=cart.filter(p=>p.id!==id);save();render();manage()}
+function saveSettings(){let n=document.getElementById("wa").value.replace(/\D/g,"");if(n&&(!n.startsWith("880")||n.length<13||n.length>13)){alert("বাংলাদেশের নম্বর 880 দিয়ে শুরু করে ১৩ সংখ্যার দাও।");return}localStorage.setItem("tw_wa",n);alert("সেটিংস সেভ হয়েছে।")}
+function cartView(){let items=cart.map(c=>({...products.find(p=>p.id===c.id),qty:c.qty})).filter(x=>x.id);document.getElementById("cartitems").innerHTML=items.map(p=>`<div class="cartline"><span>${p.icon} ${escapeHtml(p.name)} × ${p.qty}</span><b>${money(p.price*p.qty)}</b></div>`).join("")||'<p class="note">কার্ট খালি।</p>';document.getElementById("total").textContent="মোট: "+money(items.reduce((s,p)=>s+p.price*p.qty,0))}
+function checkout(){let wa=localStorage.getItem("tw_wa"),name=document.getElementById("buyer").value.trim(),addr=document.getElementById("address").value.trim(),phone=document.getElementById("phone").value.trim();if(!cart.length){alert("আগে কার্টে পণ্য যোগ করো।");return}if(!wa){alert("আগে অ্যাডমিন প্যানেল থেকে ব্যবসায়িক WhatsApp নম্বর সেট করো।");return}if(!name||!addr||!phone){alert("নাম, ঠিকানা ও মোবাইল নম্বর পূরণ করো।");return}let items=cart.map(c=>{let p=products.find(x=>x.id===c.id);return p?`${p.name} × ${c.qty} = ${money(p.price*c.qty)}`:""}).filter(Boolean).join("\n");let total=cart.reduce((s,c)=>{let p=products.find(x=>x.id===c.id);return s+(p?p.price*c.qty:0)},0);let msg=`নতুন অর্ডার - TECH WORLD BD\nনাম: ${name}\nমোবাইল: ${phone}\nঠিকানা: ${addr}\n\nপণ্য:\n${items}\n\nমোট: ${money(total)}`;window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`,"_blank")}
+document.getElementById("year").textContent=new Date().getFullYear();render();
+</script>
+</body></html>
